@@ -228,6 +228,8 @@ class SimpleInterpreter:
                 i = end_index + 1
                 continue
 
+
+
             i += 1
 
         return lines
@@ -317,6 +319,12 @@ class SimpleInterpreter:
         Вычисляет выражение и возвращает {'value': val, 'type': type}
         """
         expression_str = expression_str.strip()
+
+        # Сначала проверяем, является ли это строковым литералом
+        if expression_str.startswith('"') and expression_str.endswith('"'):
+            return {'value': expression_str[1:-1], 'type': 'string'}
+
+        # Затем разбиваем по пробелам для других случаев
         parts = expression_str.split()
 
         if len(parts) == 1:
@@ -328,8 +336,6 @@ class SimpleInterpreter:
                 return {'value': int(word), 'type': 'int'}
             elif word.replace('.', '', 1).replace('-', '', 1).isdigit() and word.count('.') == 1:
                 return {'value': float(word), 'type': 'float'}
-            elif word.startswith('"') and word.endswith('"'):
-                return {'value': word[1:-1], 'type': 'string'}
             elif word.lower() in ['true', 'false']:
                 return {'value': word.lower() == 'true', 'type': 'bool'}
             else:
