@@ -61,3 +61,5 @@ cython_debug/
 
 # VSCode (если вдруг используешь вместе)
 .vscode/
+
+.DS_Store
