@@ -1,3 +1,4 @@
+from src.llvm.ast_token import Token
 
 
 class Lexer:
